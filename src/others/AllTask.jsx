@@ -3,34 +3,55 @@ import { AuthContext } from '../context/AuthProvider'
 
 const AllTask = () => {
 
-  const [userData,setUserData] = useContext(AuthContext)
+  const [userData, setUserData] = useContext(AuthContext)
 
   return (
-    <div className='bg-[#2c2c2c] px-4 rounded mt-3 h-100'>
-      
-      <div className='text-white font-bold text-md flex items-center justify-center mb-3'>
-        All Employees Data
+    <div className='mt-2'>
+
+      {/* Header */}
+      <div className='flex items-center justify-around 
+                  py-1 px-1 sm:px-3 
+                  border border-white bg-white 
+                  text-[10px] sm:text-md font-semibold'>
+
+        <h2 className='w-1/5 text-center'>Employee</h2>
+        <h2 className='w-1/5 text-center'>New Task</h2>
+        <h2 className='w-1/5 text-center'>Active Task</h2>
+        <h3 className='w-1/5 text-center'>Completed Task</h3>
+        <h3 className='w-1/5 text-center'>Failed Task</h3>
       </div>
 
-      <div className='flex items-center justify-around py-1 px-3 border text-md font-semibold border-white  bg-white'>
-        <h2 className='w-1/5 px-10'>Employee Name</h2>
-        <h2 className='w-1/5 px-10'> New Task</h2>
-        <h2 className='w-1/5 px-10 '>Active Task</h2>
-        <h3 className='w-1/5 px-10'>Completed Task</h3>
-        <h3 className='w-1/5 px-10 '>Failed Task</h3>
-      </div>
+      {/* Data */}
+      <div className='max-h-60 overflow-y-auto'>
+        {userData?.map((elem, index) => (
+          <div
+            key={index}
+            className='flex items-center justify-around 
+                   py-1 px-1 sm:px-3 
+                   border border-white mt-1 
+                   text-[10px] sm:text-md font-semibold'
+          >
+            <h2 className='w-1/5 text-white text-center'>
+              {elem.firstName}
+            </h2>
 
-      <div id='scroll' className='h-40 '>
-        {userData?.map(function(elem, index) { 
-         return (
-          <div key={index} className='flex items-center justify-around py-1 px-3 border border-white mt-1 text-md font-semibold'>
-           <h2 className='w-1/5 px-10 text-white'>{elem.firstName}</h2>
-        <h2 className='w-1/5 px-10 text-blue-400'>{elem.taskNumbers.newTask}</h2>
-        <h2 className='w-1/5 px-10 text-yellow-400'>{elem.taskNumbers.active}</h2>
-        <h3 className='w-1/5 px-10 text-green-400'>{elem.taskNumbers.completed}</h3>
-        <h3 className='w-1/5 px-10 text-red-400'>{elem.taskNumbers.failed}</h3>
+            <h2 className='w-1/5 text-blue-400 text-center'>
+              {elem.taskNumbers.newTask}
+            </h2>
+
+            <h2 className='w-1/5 text-yellow-400 text-center'>
+              {elem.taskNumbers.active}
+            </h2>
+
+            <h3 className='w-1/5 text-green-400 text-center'>
+              {elem.taskNumbers.completed}
+            </h3>
+
+            <h3 className='w-1/5 text-red-400 text-center'>
+              {elem.taskNumbers.failed}
+            </h3>
           </div>
-       ) })}
+        ))}
       </div>
 
     </div>
